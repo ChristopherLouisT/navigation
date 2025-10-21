@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_utama"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="paba.meet2.uts.c14230232.meet10.HomeFragment"
+        android:label="HOME"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="paba.meet2.uts.c14230232.meet10.SettingFragment"
+        android:label="SETTING"
+        tools:layout="@layout/fragment_setting" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="paba.meet2.uts.c14230232.meet10.ProfileFragment"
+        android:label="PROFILE"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_detailProfileFragment"
+            app:destination="@id/detailProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailProfileFragment"
+        android:name="paba.meet2.uts.c14230232.meet10.DetailProfileFragment"
+        android:label="fragment_detail_profile"
+        tools:layout="@layout/fragment_detail_profile" />
+</navigation>
