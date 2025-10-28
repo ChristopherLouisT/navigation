@@ -104,20 +104,24 @@ class BahanFragment : Fragment() {
         adapter: ArrayAdapter<String>
     ) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Update Data")
+        builder.setTitle("Update Kategori")
         builder.setMessage("Pilih tindakan yang ingin dilakukan")
+
+        val parts = oldValue.split(" - ")
+        val namaBahan = parts[0]
+        val kategoriLama = if (parts.size > 1) parts[1] else ""
 
         val layout = LinearLayout(requireContext())
         layout.orientation = LinearLayout.VERTICAL
         layout.setPadding(50, 40, 50, 10)
 
         val tvOld = TextView(requireContext())
-        tvOld.text = "Data lama: $oldValue"
+        tvOld.text = "Kategori lama: $kategoriLama"
         tvOld.textSize = 16f
 
         val etNew = EditText(requireContext())
         etNew.hint = "Masukkan data baru"
-        etNew.setText(oldValue)
+        etNew.setText(kategoriLama)
 
         layout.addView(tvOld)
         layout.addView(etNew)
@@ -125,11 +129,12 @@ class BahanFragment : Fragment() {
         builder.setView(layout)
 
         builder.setPositiveButton("Simpan") { dialog, _ ->
-            val newValue = etNew.text.toString().trim()
-            if (newValue.isNotEmpty()) {
+            val newCategory = etNew.text.toString().trim()
+            if (newCategory.isNotEmpty()) {
+                val newValue = "$namaBahan - $newCategory"
                 data[position] = newValue
                 adapter.notifyDataSetChanged()
-                Toast.makeText(requireContext(), "Data diupdate menjadi: $newValue", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Kategori Diperbarui Menjadi: $newCategory", Toast.LENGTH_SHORT).show()
             }
             else {
                 Toast.makeText(requireContext(), "Data baru tidak boleh kosong!", Toast.LENGTH_SHORT).show()
