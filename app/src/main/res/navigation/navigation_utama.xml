@@ -32,4 +32,9 @@
         android:name="paba.meet2.uts.c14230232.meet10.DetailProfileFragment"
         android:label="fragment_detail_profile"
         tools:layout="@layout/fragment_detail_profile" />
+    <fragment
+        android:id="@+id/bahanFragment"
+        android:name="paba.meet2.uts.c14230232.meet10.BahanFragment"
+        android:label="fragment_bahan"
+        tools:layout="@layout/fragment_bahan" />
 </navigation>
