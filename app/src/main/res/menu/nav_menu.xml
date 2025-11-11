@@ -20,6 +20,10 @@
         android:icon="@drawable/bahan"
         android:title="BAHAN"/>
     <item
+        android:id="@+id/cartFragment"
+        android:icon="@drawable/cart"
+        android:title="CART"/>
+    <item
         android:title="CONFIDENTIAL">
         <menu>
             <group android:checkableBehavior="single">

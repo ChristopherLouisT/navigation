@@ -37,4 +37,10 @@
         android:name="paba.meet2.uts.c14230232.meet10.BahanFragment"
         android:label="fragment_bahan"
         tools:layout="@layout/fragment_bahan" />
+
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="paba.meet2.uts.c14230232.meet10.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
 </navigation>

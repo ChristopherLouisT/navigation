@@ -20,6 +20,12 @@
         android:layout_height="wrap_content"
         android:hint="Masukkan kategori"/>
 
+    <EditText
+        android:id="@+id/inputURLgambar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Masukkan URL Gambar"/>
+
     <ListView
         android:id="@+id/lv1"
         android:layout_width="match_parent"
