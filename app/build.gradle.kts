@@ -50,6 +50,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.picasso)
+    implementation(libs.gson)
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
 }

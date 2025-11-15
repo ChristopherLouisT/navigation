@@ -38,10 +38,35 @@
         android:layout_height="0dp"
         android:layout_weight="9"/>
 
-    <Button
-        android:id="@+id/btnTambah"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tambahkan Item"/>
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnAddAlltoCart"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawableLeft="@drawable/cart"
+            android:drawableTint="@color/white"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:text="Add All to Cart"/>
+
+        <Button
+            android:id="@+id/btnTambah"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:layout_margin="8dp"
+            android:textColor="@color/white"
+            android:text="Tambahkan Item"/>
+    </LinearLayout>
+
 
 </LinearLayout>

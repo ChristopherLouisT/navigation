@@ -57,13 +57,13 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/btnBuy"
-                android:layout_width="128dp"
+                android:id="@+id/btnAddOnetoCart"
+                android:layout_width="160dp"
                 android:layout_height="56dp"
                 android:layout_gravity="center"
-                android:text="Buy"
+                android:text="Add to Cart"
                 android:backgroundTint="@color/black"
-                android:textSize="24sp"
+                android:textSize="15sp"
                 android:drawableLeft="@drawable/cart"
                 android:drawableTint="@color/white"/>
 
