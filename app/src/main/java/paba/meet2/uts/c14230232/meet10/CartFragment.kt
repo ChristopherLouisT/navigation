@@ -3,10 +3,13 @@ package paba.meet2.uts.c14230232.meet10
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.edit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -29,7 +32,7 @@ class CartFragment : Fragment() {
 
     private lateinit var rvCart: RecyclerView
     private lateinit var cartSP: SharedPreferences
-    private var arCart = ArrayList<dcBahan>()
+    private lateinit var boughtSP: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,22 +54,62 @@ class CartFragment : Fragment() {
 
         rvCart = view.findViewById<RecyclerView>(R.id.rvCart)
 
-        val cartSP = requireContext().getSharedPreferences("cartSP", MODE_PRIVATE)
         val gson = Gson()
-
-        val isiCartSP = cartSP.getString("dt_cart", null)
         val type = object : TypeToken<ArrayList<dcBahan>>() {}.type
+
+        cartSP = requireContext().getSharedPreferences("cartSP", MODE_PRIVATE)
+        val isiCartSP = cartSP.getString("dt_cart", null)
+
+        boughtSP = requireContext().getSharedPreferences("boughtSP", MODE_PRIVATE)
+        val isiBoughtSP = boughtSP.getString("dt_bought", null)
 
         val listCart: ArrayList<dcBahan> =
             if (isiCartSP != null) gson.fromJson(isiCartSP, type)
             else arrayListOf()
+
+        val boughtList: ArrayList<dcBahan> =
+            if (isiBoughtSP != null) gson.fromJson(isiBoughtSP, type)
+            else arrayListOf()
+
 
         tampilkanCart(listCart)
     }
 
     private fun tampilkanCart(listCart: ArrayList<dcBahan>) {
         rvCart.layoutManager = LinearLayoutManager(requireContext())
-        rvCart.adapter = adapterBahan(listCart)
+        rvCart.adapter = adapterBahan(
+            listCart,
+            {selectedItem -> buyOneItem(selectedItem, listCart)},
+            "Checkout Item"
+            )
+    }
+
+    fun buyOneItem(item: dcBahan, listCart: ArrayList<dcBahan>) {
+        val gson = Gson()
+
+        val isiBought = boughtSP.getString("dt_bought", null)
+        val type = object : TypeToken<ArrayList<dcBahan>>() {}.type
+
+        val boughtList: ArrayList<dcBahan> =
+            if (isiBought != null) gson.fromJson(isiBought, type)
+            else arrayListOf()
+
+        boughtList.add(item)
+
+        boughtSP.edit {
+            putString("dt_bought", gson.toJson(boughtList))
+        }
+
+        listCart.remove(item)
+        cartSP.edit {
+            putString("dt_cart", gson.toJson(listCart))
+        }
+
+        Log.d("DEBUG_SP", "Saving BoughtSP: " + gson.toJson(boughtList))
+        Log.d("DEBUG_SP", "Read Back: " + boughtSP.getString("dt_bought", "NULL"))
+
+        Toast.makeText(requireContext(), "Added: ${item.nama}", Toast.LENGTH_SHORT).show()
+        rvCart.adapter?.notifyDataSetChanged()
     }
 
     companion object {

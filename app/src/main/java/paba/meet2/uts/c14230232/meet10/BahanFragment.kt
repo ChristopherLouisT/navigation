@@ -143,9 +143,10 @@ class BahanFragment : Fragment() {
 
     fun tampilkanData() {
         rvBahan.layoutManager = LinearLayoutManager(requireContext())
-        rvBahan.adapter = adapterBahan(arBahan) { selectedItem ->
-            saveOneToCart(selectedItem)
-        }
+        rvBahan.adapter = adapterBahan(
+            arBahan,
+            { selectedItem -> saveOneToCart(selectedItem)
+        } ,"Add To Cart")
     }
 
     fun saveOneToCart(item: dcBahan) {

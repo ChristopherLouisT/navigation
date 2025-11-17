@@ -12,14 +12,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
 
-class adapterBahan(private val dataList: List<dcBahan>, private val onBuyClick: ((dcBahan) -> Unit)? = null) :
-    RecyclerView.Adapter<adapterBahan.ViewHolder>() {
+class adapterBahan(private val dataList: List<dcBahan>,
+                   private val onBuyClick: ((dcBahan) -> Unit)? = null,
+                    private val buttonText: String = "Add to Cart"
+) : RecyclerView.Adapter<adapterBahan.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvBahan: TextView = itemView.findViewById(R.id.tvBahan)
         val tvKategori: TextView = itemView.findViewById(R.id.tvKategori)
         val tvGambar: ImageView = itemView.findViewById(R.id.tvGambar)
-        val btnAddOnetoCart: Button = itemView.findViewById(R.id.btnAddOnetoCart)
+        val btnOneItem: Button = itemView.findViewById(R.id.btnOneItem)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,7 +34,10 @@ class adapterBahan(private val dataList: List<dcBahan>, private val onBuyClick: 
         val item = dataList[position]
         holder.tvBahan.text = item.nama
         holder.tvKategori.text = item.kategori
-        holder.btnAddOnetoCart.setOnClickListener {
+
+        holder.btnOneItem.text = buttonText
+
+        holder.btnOneItem.setOnClickListener {
             onBuyClick?.invoke(item)
         }
         Picasso.get().load(item.foto).resize(100,100).into(holder.tvGambar)
